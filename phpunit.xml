@@ -1,0 +1,8 @@
+<phpunit colors="true" strict="true">
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src/EvilCorp/</directory>
+        </whitelist>
+    </filter>
+</phpunit>
+

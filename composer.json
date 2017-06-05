@@ -1,0 +1,25 @@
+{
+    "name": "evil.corp/lets.test",
+    "description": "Exercise for testing workshop",
+    "type": "project",
+    "require": {
+        "phpunit/php-code-coverage": "^5.2"
+    },
+    "license": "WTF",
+    "authors": [
+        {
+            "name": "#TeamPayPay",
+            "email": "payments-team@bigcommerce.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "EvilCorp\\": "src/EvilCorp/",
+        "Tests\\": "tests/"
+      }
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^6.1"
+    }
+}
