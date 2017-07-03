@@ -15,7 +15,7 @@ class PaymentService
         $this->eventBus = $eventBus;
     }
 
-    public function updatePaymentStatus(Order $order, PaymentStatus $paymentStatus): \EvilCorp\Payments\PaymentService
+    public function updatePaymentStatus(Order $order, PaymentStatus $paymentStatus): PaymentService
     {
         if ($paymentStatus->isOk()) {
             $order->setPaymentStatus($paymentStatus);

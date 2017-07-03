@@ -4,5 +4,8 @@
             <directory suffix=".php">./src/EvilCorp/</directory>
         </whitelist>
     </filter>
+    <testcases>
+        <testcase>tests/</testcase>
+    </testcases>
 </phpunit>
 

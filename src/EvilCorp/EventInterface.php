@@ -2,7 +2,9 @@
 
 namespace EvilCorp;
 
-interface EventInterface
+use JsonSerializable;
+
+interface EventInterface extends JsonSerializable
 {
     public function data(): array;
 }
