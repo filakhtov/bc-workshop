@@ -16,5 +16,6 @@ class OrderTest extends TestCase
         $order->setPaymentStatus($paymentStatus);
 
         static::assertAttributeSame($paymentStatus, 'paymentStatus', $order);
+        static::assertSame(12, $order->id());
     }
 }

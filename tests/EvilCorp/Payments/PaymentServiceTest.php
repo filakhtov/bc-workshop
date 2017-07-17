@@ -12,6 +12,7 @@ class PaymentServiceTest extends TestCase
 {
     private $paymentService;
     private $eventBusMock;
+    private $order;
 
     protected function setUp()
     {
@@ -21,6 +22,7 @@ class PaymentServiceTest extends TestCase
         $this->eventBusMock = $eventBusProphecy->reveal();
 
         $this->paymentService = new PaymentService($this->eventBusMock);
+        $this->order = $this->prophesize(Order::class);
     }
 
     /** @covers \EvilCorp\Payments\PaymentService::updatePaymentStatus */
@@ -28,11 +30,10 @@ class PaymentServiceTest extends TestCase
     {
         $paymentStatus = new PaymentStatus(PaymentStatus::STATUS_OK);
 
-        $orderProphecy = $this->prophesize(Order::class);
-        $orderProphecy->setPaymentStatus($paymentStatus)->shouldBeCalled();
-        $order = $orderProphecy->reveal();
+        $this->order->setPaymentStatus($paymentStatus)->shouldBeCalled();
+        $this->order->id()->willReturn(123);
 
-        $this->paymentService->updatePaymentStatus($order, $paymentStatus);
+        $this->paymentService->updatePaymentStatus($this->order->reveal(), $paymentStatus);
     }
 
     /** @covers \EvilCorp\Payments\PaymentService::updatePaymentStatus */
@@ -40,11 +41,9 @@ class PaymentServiceTest extends TestCase
     {
         $paymentStatus = new PaymentStatus(PaymentStatus::STATUS_ERROR);
 
-        $orderProphecy = $this->prophesize(Order::class);
-        $orderProphecy->setPaymentStatus($paymentStatus)->shouldNotBeCalled();
-        $order = $orderProphecy->reveal();
+        $this->order->setPaymentStatus($paymentStatus)->shouldNotBeCalled();
 
-        $this->paymentService->updatePaymentStatus($order, $paymentStatus);
+        $this->paymentService->updatePaymentStatus($this->order->reveal(), $paymentStatus);
     }
 
     /** @covers \EvilCorp\Payments\PaymentService::__construct() */

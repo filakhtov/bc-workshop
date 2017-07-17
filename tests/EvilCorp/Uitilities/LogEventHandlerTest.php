@@ -3,6 +3,7 @@
 namespace Tests\EvilCorp\Utilities;
 
 use EvilCorp\EventInterface;
+use EvilCorp\Utilities\JsonHelper;
 use EvilCorp\Utilities\LogEventHandler;
 use EvilCorp\Utilities\Logger;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +26,12 @@ class LogEventHandlerTest extends TestCase
 
         $event = $this->prophesize(EventInterface::class);
 
-        $logEventHandler = new LogEventHandler($loggerProphecy->reveal());
+        $jsonHelper = $this->prophesize(JsonHelper::class);
+        $jsonHelper->encode($event)
+            ->willReturn($data)
+            ->shouldBeCalled();
+
+        $logEventHandler = new LogEventHandler($loggerProphecy->reveal(), $jsonHelper->reveal());
         $logEventHandler->notify($event->reveal());
     }
 }

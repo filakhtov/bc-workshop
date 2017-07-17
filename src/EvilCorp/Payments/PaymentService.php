@@ -3,7 +3,8 @@
 namespace EvilCorp\Payments;
 
 use EvilCorp\EventBusInterface;
-use EvilCorp\Orders\Order;
+use EvilCorp\Payments\Events\PaymentStatusUpdated;
+use EvilCorp\Payments\OrderInterface;
 use EvilCorp\Payments\PaymentStatus;
 
 class PaymentService
@@ -15,10 +16,12 @@ class PaymentService
         $this->eventBus = $eventBus;
     }
 
-    public function updatePaymentStatus(Order $order, PaymentStatus $paymentStatus): PaymentService
+    public function updatePaymentStatus(OrderInterface $order, PaymentStatus $paymentStatus): \EvilCorp\Payments\PaymentService
     {
         if ($paymentStatus->isOk()) {
             $order->setPaymentStatus($paymentStatus);
+            $event = new PaymentStatusUpdated($order, $paymentStatus);
+
             // Log
             // Change order status
         } else {

@@ -36,4 +36,9 @@ class JsonHelperTest extends TestCase
         $this->expectException(LogicException::class);
         $this->jsonHelper->encode($a);
     }
+
+    public function testNoThrowOnFalse()
+    {
+        static::assertSame('false', $this->jsonHelper->encode(false));
+    }
 }
