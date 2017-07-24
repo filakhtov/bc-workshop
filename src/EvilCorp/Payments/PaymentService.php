@@ -16,13 +16,13 @@ class PaymentService
         $this->eventBus = $eventBus;
     }
 
-    public function updatePaymentStatus(OrderInterface $order, PaymentStatus $paymentStatus): \EvilCorp\Payments\PaymentService
+    public function updatePaymentStatus(OrderInterface $order, PaymentStatus $paymentStatus): PaymentService
     {
         if ($paymentStatus->isOk()) {
             $order->setPaymentStatus($paymentStatus);
             $event = new PaymentStatusUpdated($order, $paymentStatus);
 
-            // Log
+            $this->eventBus->publish($event);
             // Change order status
         } else {
             // Log

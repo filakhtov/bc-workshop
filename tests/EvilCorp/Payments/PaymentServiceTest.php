@@ -7,6 +7,7 @@ use EvilCorp\Orders\Order;
 use EvilCorp\Payments\PaymentService;
 use EvilCorp\Payments\PaymentStatus;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 
 class PaymentServiceTest extends TestCase
 {
@@ -19,6 +20,8 @@ class PaymentServiceTest extends TestCase
         parent::setUp();
 
         $eventBusProphecy = $this->prophesize(EventBusInterface::class);
+        $eventBusProphecy->publish(Argument::any())->willReturn($eventBusProphecy->reveal());
+
         $this->eventBusMock = $eventBusProphecy->reveal();
 
         $this->paymentService = new PaymentService($this->eventBusMock);

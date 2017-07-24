@@ -17,6 +17,11 @@ class Order implements OrderInterface
         return $this;
     }
 
+    public function setStatus(OrderStatus $orderStatus): Order
+    {
+        //
+    }
+
     public function id(): int
     {
         return 12;
