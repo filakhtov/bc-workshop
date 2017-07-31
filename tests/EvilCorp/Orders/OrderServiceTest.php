@@ -3,6 +3,7 @@
 namespace Tests\EvilCorp\Orders;
 
 use EvilCorp\Orders\Order;
+use EvilCorp\Orders\OrderRepositoryInterface;
 use EvilCorp\Orders\OrderService;
 use EvilCorp\Orders\OrderStatus;
 use PHPUnit\Framework\TestCase;
@@ -15,11 +16,13 @@ class OrderServiceTest extends TestCase
         $status = new OrderStatus(OrderStatus::AWAITING_SHIPMENT);
 
         $orderProphecy = $this->prophesize(Order::class);
-        $order = $orderProphecy->reveal();
 
-        $orderService = new OrderService();
+        $orderRepositoryProphecy = $this->prophesize(OrderRepositoryInterface::class);
+        $orderRepositoryProphecy->getById(123)->willReturn($orderProphecy->reveal());
 
-        $orderProphecy->setStatus($status)->shouldBeCalled();
+        $orderService = new OrderService($orderRepositoryProphecy->reveal());
+
+        $orderProphecy->setStatus($status)->shouldBeCalled()->willReturn($orderProphecy->reveal());
         $orderService->updateStatus($orderId, $status);
     }
 }

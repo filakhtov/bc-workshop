@@ -1,6 +1,6 @@
 <?php
 
-namespace EvilCorp\Utilities;
+namespace EvilCorp\Utilities\EventHandlers;
 
 use EvilCorp\EventInterface;
 use EvilCorp\Utilities\EventSubscriberInterface;

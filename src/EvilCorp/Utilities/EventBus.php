@@ -4,6 +4,7 @@ namespace EvilCorp\Utilities;
 
 use EvilCorp\EventBusInterface;
 use EvilCorp\EventInterface;
+use EvilCorp\Utilities\EventSubscriberInterface;
 
 class EventBus implements EventBusInterface
 {
@@ -16,7 +17,7 @@ class EventBus implements EventBusInterface
         }
     }
 
-    private function addSubscriber(\EvilCorp\Utilities\EventSubscriberInterface $subscriber): EventBusInterface
+    private function addSubscriber(EventSubscriberInterface $subscriber): EventBusInterface
     {
         $this->subscribers[] = $subscriber;
 

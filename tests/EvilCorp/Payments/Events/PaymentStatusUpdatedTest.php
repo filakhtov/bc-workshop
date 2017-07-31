@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class PaymentStatusUpdatedTest extends TestCase
 {
-    public function testFoo()
+    public function testPaymentStatus()
     {
         $orderId = 123;
         $newPaymentStatus = PaymentStatus::STATUS_OK;
@@ -29,5 +29,10 @@ class PaymentStatusUpdatedTest extends TestCase
             ]),
             json_encode($event)
         );
+    }
+
+    public function test()
+    {
+        TODO: test id getter
     }
 }

@@ -3,10 +3,11 @@
 namespace EvilCorp\Payments\Events;
 
 use EvilCorp\EventInterface;
+use EvilCorp\Orders\Events\OrderEventInterface;
 use EvilCorp\Payments\OrderInterface;
 use EvilCorp\Payments\PaymentStatus;
 
-class PaymentStatusUpdated implements EventInterface
+class PaymentStatusUpdated implements EventInterface, OrderEventInterface
 {
     private $orderId;
     private $paymentStatus;
@@ -28,5 +29,10 @@ class PaymentStatusUpdated implements EventInterface
     public function jsonSerialize(): array
     {
         return $this->data();
+    }
+
+    public function getOrderId(): int
+    {
+        return $this->orderId;
     }
 }

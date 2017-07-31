@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\EvilCorp\Utilities;
+namespace Tests\EvilCorp\Utilities\EventHandlers;
 
 use EvilCorp\EventInterface;
 use EvilCorp\Utilities\JsonHelper;
-use EvilCorp\Utilities\LogEventHandler;
+use EvilCorp\Utilities\EventHandlers\LogEventHandler;
 use EvilCorp\Utilities\Logger;
 use PHPUnit\Framework\TestCase;
 
